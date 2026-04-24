@@ -7,7 +7,7 @@ spring:
 
 data:
   file:
-    path: /home/zzoro/Desktop/dev/cursadas-POO/manga-novel-api/data/
+    path: ${DATA_PATH:./data/}
 
 springdoc:
   api-docs:

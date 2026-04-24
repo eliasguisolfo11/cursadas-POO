@@ -36,13 +36,11 @@ public abstract class JsonFileRepository<T> {
 
     @PostConstruct
     public void init() {
-        System.out.println(">>> JsonFileRepository.init() for " + clazz.getSimpleName() + " path=" + filePath);
         try {
             File file = new File(filePath);
             if (file.exists()) {
                 List<T> items = objectMapper.readValue(file,
                     objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
-                System.out.println(">>> Loaded " + items.size() + " " + clazz.getSimpleName() + "s");
                 for (T item : items) {
                     Long id = getId(item);
                     storage.put(id, item);
@@ -50,11 +48,8 @@ public abstract class JsonFileRepository<T> {
                         idGenerator.set(id + 1);
                     }
                 }
-            } else {
-                System.out.println(">>> File not exists: " + filePath);
             }
         } catch (IOException e) {
-            System.out.println(">>> Error loading: " + e.getMessage());
         }
     }
 
