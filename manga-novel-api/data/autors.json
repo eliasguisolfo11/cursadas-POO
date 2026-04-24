@@ -1,0 +1,5 @@
+[
+  {"id": 1, "nombre": "Eiichiro Oda", "pais": "Japon", "fechaNacimiento": "01/01/1975"},
+  {"id": 2, "nombre": "Tite Kubo", "pais": "Japon", "fechaNacimiento": "26/06/1970"},
+  {"id": 3, "nombre": "Jiang Nan", "pais": "China", "fechaNacimiento": "05/11/1980"}
+]

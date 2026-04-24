@@ -1,0 +1,6 @@
+[
+  {"id": 1, "titulo": "One Piece", "descripcion": "Aventura de Piratas en busca del One Piece", "estado": "En Publicacion", "anioPublicacion": 1997, "autorId": 1, "generosIds": [1, 3]},
+  {"id": 2, "titulo": "Bleach", "descripcion": "Soul Reapers y el mundo de los espiritus", "estado": "Finalizado", "anioPublicacion": 2001, "autorId": 2, "generosIds": [1, 2]},
+  {"id": 3, "titulo": "Solo Leveling", "descripcion": "El mas debil se vuelve el mas fuerte", "estado": "Finalizado", "anioPublicacion": 2018, "autorId": 3, "generosIds": [2, 3]},
+  {"id": 4, "titulo": "Mercenary Enrollment", "descripcion": "Web Novel coresiana convertida a manga", "estado": "En Publicacion", "anioPublicacion": 2020, "autorId": 3, "generosIds": [2, 3]}
+]

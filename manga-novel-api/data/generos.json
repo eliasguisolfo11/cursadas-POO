@@ -1,0 +1,6 @@
+[
+  {"id": 1, "nombre": "Shonen", "descripcion": "Manga dirigido a jovenes adolescentes"},
+  {"id": 2, "nombre": "Fantasia", "descripcion": "Historias con elementos magicos y fantasticos"},
+  {"id": 3, "nombre": "Accion", "descripcion": "Historia centrada en batalla y conflicto"},
+  {"id": 4, "nombre": "Wuxia", "descripcion": "Novelas chinese de artes marciales"}
+]
