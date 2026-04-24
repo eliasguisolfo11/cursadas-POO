@@ -17,7 +17,6 @@ cursadas-POO/
 │   │       ├── java/
 │   │       │   └── com/example/manga/
 │   │       │       ├── MangaNovelaApplication.java
-│   │       │       ├── config/MenuCLI.java
 │   │       │       ├── controller/
 │   │       │       ├── dto/
 │   │       │       ├── exception/
@@ -69,6 +68,8 @@ data:
     path: ${DATA_PATH:./data/}
 
 springdoc:
+  api-docs:
+    path: /api-docs
   swagger-ui:
     path: /api/docs
 ```
