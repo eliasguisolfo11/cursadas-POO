@@ -1,13 +1,14 @@
 package com.example.manga.repository;
 
 import com.example.manga.model.Capitulo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
 public class CapituloRepository extends JsonFileRepository<Capitulo> {
-    public CapituloRepository() {
-        super(Capitulo.class, "data/");
+    public CapituloRepository(@Value("${data.file.path}") String dataPath) {
+        super(Capitulo.class, dataPath);
     }
 
     public List<Capitulo> findByMangaId(Long mangaId) {

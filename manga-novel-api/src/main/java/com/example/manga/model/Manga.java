@@ -27,6 +27,9 @@ public class Manga {
 
     private List<Capitulo> capitulos = new ArrayList<>();
 
+    private Long autorId;
+    private List<Long> generosIds;
+
     public Manga() {}
 
     public Long getId() { return id; }
@@ -45,6 +48,17 @@ public class Manga {
     public void setGeneros(List<Genero> generos) { this.generos = generos; }
     public List<Capitulo> getCapitulos() { return capitulos; }
     public void setCapitulos(List<Capitulo> capitulos) { this.capitulos = capitulos; }
+
+    public Long getAutorId() { return autorId != null ? autorId : (autor != null ? autor.getId() : null); }
+    public void setAutorId(Long autorId) { this.autorId = autorId; }
+    public List<Long> getGenerosIds() { 
+        if (generosIds != null) return generosIds;
+        if (generos != null) {
+            return generos.stream().map(g -> g.getId()).toList();
+        }
+        return null;
+    }
+    public void setGenerosIds(List<Long> generosIds) { this.generosIds = generosIds; }
 
     public void addGenero(Genero genero) {
         this.generos.add(genero);
