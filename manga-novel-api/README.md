@@ -18,7 +18,6 @@ cursadas-POO/
 │   │       │   └── com/example/manga/
 │   │       │       ├── MangaNovelaApplication.java
 │   │       │       ├── controller/
-│   │       │       ├── dto/
 │   │       │       ├── exception/
 │   │       │       ├── model/
 │   │       │       ├── repository/

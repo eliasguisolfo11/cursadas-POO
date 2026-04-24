@@ -1,6 +1,6 @@
 package com.example.manga.controller;
 
-import com.example.manga.dto.GeneroDTO;
+import com.example.manga.model.Genero;
 import com.example.manga.service.GeneroService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,23 +20,23 @@ public class GeneroController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GeneroDTO>> findAll() {
+    public ResponseEntity<List<Genero>> findAll() {
         return ResponseEntity.ok(generoService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GeneroDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<Genero> findById(@PathVariable Long id) {
         return ResponseEntity.ok(generoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<GeneroDTO> create(@Valid @RequestBody GeneroDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(generoService.create(dto));
+    public ResponseEntity<Genero> create(@Valid @RequestBody Genero genero) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(generoService.create(genero));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GeneroDTO> update(@PathVariable Long id, @Valid @RequestBody GeneroDTO dto) {
-        return ResponseEntity.ok(generoService.update(id, dto));
+    public ResponseEntity<Genero> update(@PathVariable Long id, @Valid @RequestBody Genero genero) {
+        return ResponseEntity.ok(generoService.update(id, genero));
     }
 
     @DeleteMapping("/{id}")

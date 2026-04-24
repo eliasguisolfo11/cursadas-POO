@@ -1,6 +1,5 @@
 package com.example.manga.service;
 
-import com.example.manga.dto.AutorDTO;
 import com.example.manga.model.Autor;
 import com.example.manga.repository.AutorRepository;
 import org.springframework.stereotype.Service;
@@ -17,53 +16,35 @@ public class AutorService {
         this.autorRepository = autorRepository;
     }
 
-    public List<AutorDTO> findAll() {
-        return autorRepository.findAll().stream()
-            .map(this::toAutorDTO)
-            .collect(Collectors.toList());
+    public List<Autor> findAll() {
+        return autorRepository.findAll();
     }
 
-    public AutorDTO findById(Long id) {
-        Autor autor = autorRepository.findById(id)
+    public Autor findById(Long id) {
+        return autorRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + id));
-        return toAutorDTO(autor);
     }
 
-    public AutorDTO create(AutorDTO dto) {
-        Autor autor = new Autor();
-        autor.setNombre(dto.getNombre());
-        autor.setPais(dto.getPais());
-        autor.setFechaNacimiento(dto.getFechaNacimiento());
+    public Autor create(Autor autor) {
         autorRepository.save(autor);
-        return toAutorDTO(autor);
+        return autor;
     }
 
-    public AutorDTO update(Long id, AutorDTO dto) {
-        Autor autor = autorRepository.findById(id)
+    public Autor update(Long id, Autor autor) {
+        Autor existing = autorRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + id));
-        autor.setNombre(dto.getNombre());
-        autor.setPais(dto.getPais());
-        autor.setFechaNacimiento(dto.getFechaNacimiento());
-        autorRepository.save(autor);
-        return toAutorDTO(autor);
+        existing.setNombre(autor.getNombre());
+        existing.setPais(autor.getPais());
+        existing.setFechaNacimiento(autor.getFechaNacimiento());
+        autorRepository.save(existing);
+        return existing;
     }
 
     public void delete(Long id) {
         autorRepository.deleteById(id);
     }
 
-    public List<AutorDTO> search(String nombre) {
-        return autorRepository.findByNombreContaining(nombre).stream()
-            .map(this::toAutorDTO)
-            .collect(Collectors.toList());
-    }
-
-    private AutorDTO toAutorDTO(Autor autor) {
-        AutorDTO dto = new AutorDTO();
-        dto.setId(autor.getId());
-        dto.setNombre(autor.getNombre());
-        dto.setPais(autor.getPais());
-        dto.setFechaNacimiento(autor.getFechaNacimiento());
-        return dto;
+    public List<Autor> search(String nombre) {
+        return autorRepository.findByNombreContaining(nombre);
     }
 }

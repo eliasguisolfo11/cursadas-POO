@@ -1,6 +1,5 @@
 package com.example.manga.service;
 
-import com.example.manga.dto.*;
 import com.example.manga.model.*;
 import com.example.manga.repository.*;
 import org.springframework.stereotype.Service;
@@ -24,93 +23,64 @@ public class MangaService {
         this.capituloRepository = capituloRepository;
     }
 
-    public List<MangaDTO> findAll() {
-        return mangaRepository.findAll().stream()
-            .map(this::toMangaDTO)
-            .collect(Collectors.toList());
+    public List<Manga> findAll() {
+        return mangaRepository.findAll();
     }
 
-    public MangaDTO findById(Long id) {
-        Manga manga = mangaRepository.findById(id)
+    public Manga findById(Long id) {
+        return mangaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Manga no encontrado con id: " + id));
-        return toMangaDTO(manga);
     }
 
-    public MangaDTO create(MangaDTO dto) {
-        Autor autor = autorRepository.findById(dto.getAutorId())
-            .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + dto.getAutorId()));
+    public Manga create(Manga manga) {
+        if (manga.getAutorId() != null) {
+            Autor autor = autorRepository.findById(manga.getAutorId())
+                .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + manga.getAutorId()));
+            manga.setAutor(autor);
+        }
 
-        Manga manga = new Manga();
-        manga.setTitulo(dto.getTitulo());
-        manga.setDescripcion(dto.getDescripcion());
-        manga.setEstado(dto.getEstado());
-        manga.setAnioPublicacion(dto.getAnioPublicacion());
-        manga.setAutor(autor);
-
-        if (dto.getGenerosIds() != null) {
-            for (Long generoId : dto.getGenerosIds()) {
+        if (manga.getGenerosIds() != null) {
+            for (Long generoId : manga.getGenerosIds()) {
                 generoRepository.findById(generoId).ifPresent(manga::addGenero);
             }
         }
 
         mangaRepository.save(manga);
-        return toMangaDTO(manga);
+        return manga;
     }
 
-    public MangaDTO update(Long id, MangaDTO dto) {
-        Manga manga = mangaRepository.findById(id)
+    public Manga update(Long id, Manga manga) {
+        Manga existing = mangaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Manga no encontrado con id: " + id));
 
-        manga.setTitulo(dto.getTitulo());
-        manga.setDescripcion(dto.getDescripcion());
-        manga.setEstado(dto.getEstado());
-        manga.setAnioPublicacion(dto.getAnioPublicacion());
+        existing.setTitulo(manga.getTitulo());
+        existing.setDescripcion(manga.getDescripcion());
+        existing.setEstado(manga.getEstado());
+        existing.setAnioPublicacion(manga.getAnioPublicacion());
 
-        if (dto.getAutorId() != null) {
-            Autor autor = autorRepository.findById(dto.getAutorId())
-                .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + dto.getAutorId()));
-            manga.setAutor(autor);
+        if (manga.getAutorId() != null) {
+            Autor autor = autorRepository.findById(manga.getAutorId())
+                .orElseThrow(() -> new RuntimeException("Autor no encontrado con id: " + manga.getAutorId()));
+            existing.setAutor(autor);
         }
 
-        mangaRepository.save(manga);
-        return toMangaDTO(manga);
+        mangaRepository.save(existing);
+        return existing;
     }
 
     public void delete(Long id) {
         mangaRepository.deleteById(id);
     }
 
-    public List<MangaDTO> search(String titulo) {
-        return mangaRepository.findByTituloContaining(titulo).stream()
-            .map(this::toMangaDTO)
-            .collect(Collectors.toList());
+    public List<Manga> search(String titulo) {
+        return mangaRepository.findByTituloContaining(titulo);
     }
 
-    public List<MangaDTO> findByAutor(Long autorId) {
-        return mangaRepository.findByAutorId(autorId).stream()
-            .map(this::toMangaDTO)
-            .collect(Collectors.toList());
+    public List<Manga> findByAutor(Long autorId) {
+        return mangaRepository.findByAutorId(autorId);
     }
 
-    public List<MangaDTO> findByEstado(String estado) {
-        return mangaRepository.findByEstado(estado).stream()
-            .map(this::toMangaDTO)
-            .collect(Collectors.toList());
-    }
-
-    private MangaDTO toMangaDTO(Manga manga) {
-        MangaDTO dto = new MangaDTO();
-        dto.setId(manga.getId());
-        dto.setTitulo(manga.getTitulo());
-        dto.setDescripcion(manga.getDescripcion());
-        dto.setEstado(manga.getEstado());
-        dto.setAnioPublicacion(manga.getAnioPublicacion());
-        if (manga.getAutor() != null) {
-            dto.setAutorId(manga.getAutor().getId());
-        }
-        if (manga.getGeneros() != null) {
-            dto.setGenerosIds(manga.getGeneros().stream().map(Genero::getId).collect(Collectors.toList()));
-        }
-        return dto;
+    public List<Manga> findByEstado(String estado) {
+        return mangaRepository.findByEstado(estado);
     }
 }

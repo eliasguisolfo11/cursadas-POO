@@ -16,6 +16,7 @@ public class Capitulo {
     private String contenido;
 
     private Manga manga;
+    private Long mangaId;
 
     public Capitulo() {}
 
@@ -29,4 +30,6 @@ public class Capitulo {
     public void setContenido(String contenido) { this.contenido = contenido; }
     public Manga getManga() { return manga; }
     public void setManga(Manga manga) { this.manga = manga; }
+    public Long getMangaId() { return mangaId != null ? mangaId : (manga != null ? manga.getId() : null); }
+    public void setMangaId(Long mangaId) { this.mangaId = mangaId; }
 }

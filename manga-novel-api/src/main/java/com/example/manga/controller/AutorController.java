@@ -1,6 +1,6 @@
 package com.example.manga.controller;
 
-import com.example.manga.dto.AutorDTO;
+import com.example.manga.model.Autor;
 import com.example.manga.service.AutorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,23 +20,23 @@ public class AutorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AutorDTO>> findAll() {
+    public ResponseEntity<List<Autor>> findAll() {
         return ResponseEntity.ok(autorService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AutorDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<Autor> findById(@PathVariable Long id) {
         return ResponseEntity.ok(autorService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<AutorDTO> create(@Valid @RequestBody AutorDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(autorService.create(dto));
+    public ResponseEntity<Autor> create(@Valid @RequestBody Autor autor) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(autorService.create(autor));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorDTO> update(@PathVariable Long id, @Valid @RequestBody AutorDTO dto) {
-        return ResponseEntity.ok(autorService.update(id, dto));
+    public ResponseEntity<Autor> update(@PathVariable Long id, @Valid @RequestBody Autor autor) {
+        return ResponseEntity.ok(autorService.update(id, autor));
     }
 
     @DeleteMapping("/{id}")
@@ -46,7 +46,7 @@ public class AutorController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<AutorDTO>> search(@RequestParam String nombre) {
+    public ResponseEntity<List<Autor>> search(@RequestParam String nombre) {
         return ResponseEntity.ok(autorService.search(nombre));
     }
 }

@@ -1,6 +1,6 @@
 package com.example.manga.controller;
 
-import com.example.manga.dto.CapituloDTO;
+import com.example.manga.model.Capitulo;
 import com.example.manga.service.CapituloService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,23 +20,23 @@ public class CapituloController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CapituloDTO>> findAll() {
+    public ResponseEntity<List<Capitulo>> findAll() {
         return ResponseEntity.ok(capituloService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CapituloDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<Capitulo> findById(@PathVariable Long id) {
         return ResponseEntity.ok(capituloService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<CapituloDTO> create(@Valid @RequestBody CapituloDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(capituloService.create(dto));
+    public ResponseEntity<Capitulo> create(@Valid @RequestBody Capitulo capitulo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(capituloService.create(capitulo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CapituloDTO> update(@PathVariable Long id, @Valid @RequestBody CapituloDTO dto) {
-        return ResponseEntity.ok(capituloService.update(id, dto));
+    public ResponseEntity<Capitulo> update(@PathVariable Long id, @Valid @RequestBody Capitulo capitulo) {
+        return ResponseEntity.ok(capituloService.update(id, capitulo));
     }
 
     @DeleteMapping("/{id}")
@@ -46,7 +46,7 @@ public class CapituloController {
     }
 
     @GetMapping("/manga/{mangaId}")
-    public ResponseEntity<List<CapituloDTO>> findByManga(@PathVariable Long mangaId) {
+    public ResponseEntity<List<Capitulo>> findByManga(@PathVariable Long mangaId) {
         return ResponseEntity.ok(capituloService.findByManga(mangaId));
     }
 }
