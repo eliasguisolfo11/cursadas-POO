@@ -54,7 +54,7 @@ java -jar target/manga-novela-api-1.0.0.jar
 
 ## Configuración
 
-Editar `src/main/resources/application.yml`:
+La ruta de los datos se configura en `application.yml`. Por defecto usa `./data/` (relativo al directorio de ejecución).
 
 ```yaml
 server:
@@ -66,14 +66,16 @@ spring:
 
 data:
   file:
-    path: /ruta/absoluta/hasta/cursadas-POO/manga-novel-api/data/
+    path: ${DATA_PATH:./data/}
 
 springdoc:
-  api-docs:
-    path: /api-docs
   swagger-ui:
     path: /api/docs
 ```
+
+**Variable de entorno:** `DATA_PATH`
+- Default: `./data/`
+- Ejemplo: `DATA_PATH=/ruta/absoluta/data/ mvn spring-boot:run`
 
 Swagger disponible en: http://localhost:8080/api/docs
 
