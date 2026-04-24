@@ -9,15 +9,11 @@ data:
   file:
     path: /home/zzoro/Desktop/dev/cursadas-POO/manga-novel-api/data/
 
-cli:
-  enabled: false
-
 springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
     path: /api/docs
-    operationsSorter: method
 
 logging:
   level:

@@ -68,9 +68,6 @@ data:
   file:
     path: /ruta/absoluta/hasta/cursadas-POO/manga-novel-api/data/
 
-cli:
-  enabled: false
-
 springdoc:
   api-docs:
     path: /api-docs
@@ -78,25 +75,7 @@ springdoc:
     path: /api/docs
 ```
 
-### Modo CLI
-
-```yaml
-cli:
-  enabled: true
-```
-
-### Modo Web
-
-```yaml
-cli:
-  enabled: false
-
-springdoc:
-  swagger-ui:
-    path: /api/docs
-```
-
-Acceder a Swagger: http://localhost:8080/api/docs
+Swagger disponible en: http://localhost:8080/api/docs
 
 ## Entidades y Relaciones
 
