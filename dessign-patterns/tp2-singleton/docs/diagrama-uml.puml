@@ -1,0 +1,40 @@
+@startuml
+package singleton {
+
+  class Logger {
+    - instancia: Logger
+    - Logger()
+    + getInstance(): Logger
+    + log(String mensaje): void
+  }
+
+  class LoginService {
+    - logger: Logger
+    + iniciarSesion(String): void
+    + cerrarSesion(String): void
+  }
+
+  class TransferService {
+    - logger: Logger
+    + transferir(double): void
+  }
+
+  class AccountService {
+    - logger: Logger
+    + consultarSaldo(): void
+  }
+
+  class Main {
+    + main(String[]): void
+  }
+
+  Logger o-- Logger : <<singleton>> instancia
+  LoginService ..> Logger : usa
+  TransferService ..> Logger : usa
+  AccountService ..> Logger : usa
+  Main ..> Logger
+  Main ..> LoginService
+  Main ..> TransferService
+  Main ..> AccountService
+}
+@enduml

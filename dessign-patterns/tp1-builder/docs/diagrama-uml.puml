@@ -1,0 +1,55 @@
+@startuml
+package builder {
+
+  enum TipoCuenta {
+    CAJA_AHORRO
+    CUENTA_CORRIENTE
+  }
+
+  enum Moneda {
+    ARS
+    USD
+  }
+
+  class CuentaBancaria {
+    - titular: String
+    - dni: String
+    - tipoCuenta: TipoCuenta
+    - moneda: Moneda
+    - tarjetaDebito: boolean
+    - chequera: boolean
+    - homeBanking: boolean
+    - limiteExtraccion: double
+    + mostrarDatos(): void
+  }
+
+  class CuentaBancariaBuilder {
+    - titular: String
+    - dni: String
+    - tipoCuenta: TipoCuenta
+    - moneda: Moneda
+    - tarjetaDebito: boolean
+    - chequera: boolean
+    - homeBanking: boolean
+    - limiteExtraccion: double
+    + setTitular(String): CuentaBancariaBuilder
+    + setDni(String): CuentaBancariaBuilder
+    + setTipoCuenta(TipoCuenta): CuentaBancariaBuilder
+    + setMoneda(Moneda): CuentaBancariaBuilder
+    + setTarjetaDebito(boolean): CuentaBancariaBuilder
+    + setChequera(boolean): CuentaBancariaBuilder
+    + setHomeBanking(boolean): CuentaBancariaBuilder
+    + setLimiteExtraccion(double): CuentaBancariaBuilder
+    + build(): CuentaBancaria
+  }
+
+  class Main {
+    + main(String[]): void
+  }
+
+  CuentaBancariaBuilder --> CuentaBancaria : build()
+  Main ..> CuentaBancariaBuilder
+  CuentaBancaria ..> TipoCuenta
+  CuentaBancaria ..> Moneda
+}
+@enduml
