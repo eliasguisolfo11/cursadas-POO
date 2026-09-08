@@ -1,0 +1,2 @@
+# EXTERNAL — clientes de servicios de terceros (APIs, email, storage).
+# Siempre detrás de una interfaz/port para poder sustituirlos.

@@ -1,0 +1,9 @@
+# COMPOSITION ROOT — único lugar que conoce las implementaciones concretas.
+# Aquí se cablean puertos -> implementaciones y se inyectan políticas (Strategy)
+# y cadenas (Chain of Responsibility). El resto del código solo ve abstracciones.
+#
+# registro de ejemplo:
+#   register(UserRepository       -> SqlUserRepository)
+#   register(UserEventPublisher   -> KafkaEventPublisher)
+#   register(RegisterUser, policy -> RegistrationValidationPolicy)
+#   register(RegisterUser, chain  -> Validate->Duplicate->Persist->Publish)

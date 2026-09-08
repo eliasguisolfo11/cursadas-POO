@@ -1,0 +1,25 @@
+# CHAIN OF RESPONSIBILITY — pasos secuenciales, cada handler decide si procesa o delega.
+# Útil cuando varios pasos participan EN ORDEN y pueden cortar la cadena.
+
+# Interfaz del handler.
+handler UserRegistrationHandler:
+  method handle(context: RegistrationContext) -> void
+  method setNext(next: UserRegistrationHandler) -> UserRegistrationHandler
+
+# Base con encadenamiento.
+class BaseRegistrationHandler < UserRegistrationHandler:
+  next : UserRegistrationHandler | nil
+  method setNext(n): self.next = n; return n
+  method handle(context):
+    # llama handle internamente y luego delega:
+    #   1. self.process(context)   # lógica propia
+    #   2. if self.next != nil: self.next.handle(context)
+    ...
+
+# Handlers concretos (SRP: cada uno hace UNA cosa).
+handler ValidateAndNormalizeHandler < BaseRegistrationHandler    # valida entradas
+handler DuplicateCheckHandler    < BaseRegistrationHandler       # ¿ya existe el email?
+handler PersistUserHandler       < BaseRegistrationHandler       # guarda vía UserRepository
+handler PublishEventHandler      < BaseRegistrationHandler       # publica UserRegistered
+
+# Composición (en composition root o use-case): register -> validate -> duplicate -> persist -> publish

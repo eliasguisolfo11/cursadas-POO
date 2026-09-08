@@ -1,0 +1,2 @@
+# BOOTSTRAP — orden de arranque explícito:
+#   config -> logging -> infraestructura -> módulos -> http

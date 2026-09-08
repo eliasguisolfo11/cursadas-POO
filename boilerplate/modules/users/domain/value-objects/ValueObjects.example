@@ -1,0 +1,15 @@
+# VALUE OBJECT — inmutables, con validación propia (SRP). Sin if-chains: cada VO valida su regla.
+
+value-object Email:
+  value : string
+
+  constructor(value):
+    # validación atómica (un solo concepto)
+    if not self._isValid(value): raise DomainError.InvalidEmail
+    self.value = value
+
+value-object UserId:
+  value : string | int
+
+value-object Username:
+  value : string

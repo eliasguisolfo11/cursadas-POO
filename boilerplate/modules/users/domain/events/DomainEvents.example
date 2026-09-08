@@ -1,0 +1,10 @@
+# EVENTO DE DOMINIO — inmutable, describe algo que YA ocurrió (pasado).
+
+event UserRegistered:
+  userId    : UserId
+  email     : Email
+  occurredAt: DateTime
+
+event UserActivated:
+  userId    : UserId
+  occurredAt: DateTime

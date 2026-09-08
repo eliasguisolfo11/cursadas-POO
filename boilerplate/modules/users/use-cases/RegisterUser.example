@@ -1,0 +1,23 @@
+# CASOS DE USO (Aplicación) — orquestan dominio + puertos + políticas. Sin reglas de negocio
+# inline: delegan a dominio, políticas (Strategy) y cadenas (Chain of Responsibility).
+
+use-case RegisterUser:
+  policy     : UserValidationPolicy     # Strategy inyectada (DIP)
+  repository : UserRepository           # puerto inyectado (DIP)
+  chain      : UserRegistrationHandler  # cadena compuesta
+
+  method execute(input: UserInput) -> User:
+    result = self.policy.validate(input)           # una sola estrategia, sin if-chains
+    if result.hasErrors(): raise ValidationError(result)
+
+    context = RegistrationContext(input)
+    self.chain.handle(context)                     # pipeline encadenado
+
+    return context.user
+
+use-case GetUserById:
+  repository : UserRepository
+  method execute(id: UserId) -> User:
+    user = self.repository.findById(id)
+    if user == nil: raise UserNotFound
+    return user
