@@ -1,6 +1,0 @@
-# ERRORES DE DOMINIO — jerarquía de errores específicos del módulo.
-
-error DomainError          # base (hereda de shared/errors/DomainError global si existe)
-error InvalidEmail    < DomainError
-error UsernameTaken   < DomainError
-error UserNotFound    < DomainError

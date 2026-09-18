@@ -1,6 +1,0 @@
-# SERVICIO DE DOMINIO — lógica que no pertenece a una sola entidad (ni a infraestructura).
-
-domain-service UserUniqueness:
-  repository : UserRepository
-  method isEmailTaken(email: Email) -> bool:
-    return self.repository.findByEmail(email) != nil

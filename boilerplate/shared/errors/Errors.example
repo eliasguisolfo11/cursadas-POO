@@ -1,7 +1,0 @@
-# ERRORES GLOBALES — jerarquía base de errores reutilizable por todos los módulos.
-
-error AppError
-error DomainError    < AppError
-error NotFoundError  < DomainError
-error ValidationError< DomainError
-error InfrastructureError < AppError

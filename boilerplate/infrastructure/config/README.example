@@ -1,2 +1,0 @@
-# CONFIG — carga y provee configuración desde .env.
-# Lee variables de entorno y expone un objeto de configuración tipado.

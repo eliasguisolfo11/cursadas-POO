@@ -1,2 +1,0 @@
-# MODULES REGISTRY — registro central de módulos instalados en el monolito.
-# Cada módulo se registra aquí para ser compuesto en el arranque.

@@ -1,2 +1,31 @@
+# Compilados
 *.class
+target/
+
+# Builds
+dist/
+coverage/
+
+# Dependencias
+node_modules/
+
+# Lockfiles generados (boilerplate: cada copia regenera el propio)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Entorno (secretos — nunca versionar)
+.env
+.env.local
+.env.*.local
+
+# Bases de datos locales
+*.sqlite
+*.sqlite3
+
+# Otros proyectos locales
 dessign-patterns-builder/
+
+# Editor
+.vscode/
+.idea/

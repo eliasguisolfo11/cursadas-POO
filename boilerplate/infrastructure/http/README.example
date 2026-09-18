@@ -1,2 +1,0 @@
-# HTTP — capa de transporte: controladores, rutas, middlewares, serializers.
-# Traduce HTTP <-> casos de uso. No contiene reglas de negocio.

@@ -1,2 +1,0 @@
-# TESTS UNITARIOS — de dominio y casos de uso, aislados con stubs/mocks de los puertos.
-# Probar cada estrategia por separado y la cadena completa (orden + corte).
