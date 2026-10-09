@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "Modelo" {
+  class Compra {
+    cliente: str
+    cantidad_productos: int
+    subtotal: Decimal
+  }
+  class Pedido {
+    numero: str
+    precio_final: Decimal
+    cliente_valido: bool
+    stock_disponible: bool
+    pago_aprobado: bool
+    limite_compra: Decimal
+  }
+  Compra <-- Pedido
+}
+
+package "Strategy: cálculo del precio" {
+  abstract class EstrategiaPrecio {
+    +nombre: str
+    +aplicar(compra, precio_actual): Decimal
+  }
+  class CalculadoraPrecio {
+    +calcular(compra, estrategias): Decimal
+  }
+  class DescuentoComun
+  class DescuentoPremium
+  class DescuentoVIP
+  class DescuentoPorCantidad
+  class DescuentoPorcentaje
+  class DescuentoBlackFriday
+  class RetiroEnSucursal
+  class EnvioNormal
+  class EnvioExpress
+  EstrategiaPrecio <|-- DescuentoComun
+  EstrategiaPrecio <|-- DescuentoPremium
+  EstrategiaPrecio <|-- DescuentoVIP
+  EstrategiaPrecio <|-- DescuentoPorCantidad
+  EstrategiaPrecio <|-- DescuentoPorcentaje
+  DescuentoPorcentaje <|-- DescuentoBlackFriday
+  EstrategiaPrecio <|-- RetiroEnSucursal
+  EstrategiaPrecio <|-- EnvioNormal
+  EstrategiaPrecio <|-- EnvioExpress
+  CalculadoraPrecio o--> "0..*" EstrategiaPrecio : aplica en orden
+}
+
+package "Chain of Responsibility: validaciones" {
+  abstract class ValidadorPedido {
+    +set_siguiente(siguiente): ValidadorPedido
+    +validar(pedido): bool
+    +revisar(pedido): Optional[str]
+  }
+  abstract class ValidadorBase
+  class ValidarCliente
+  class ValidarStock
+  class ValidarPago
+  class ValidarLimiteCompra
+  ValidadorPedido <|-- ValidadorBase
+  ValidadorBase <|-- ValidarCliente
+  ValidadorBase <|-- ValidarStock
+  ValidadorBase <|-- ValidarPago
+  ValidadorBase <|-- ValidarLimiteCompra
+  ValidadorBase --> "0..1" ValidadorPedido : siguiente
+}
+
+main ..> CalculadoraPrecio
+main ..> ValidadorPedido : compone cadena
+CalculadoraPrecio ..> Compra
+ValidadorPedido ..> Pedido
+@enduml
