@@ -1,0 +1,24 @@
+
+=== PARTE 2 Y 3: CANALES INTERCAMBIABLES ===
+[EMAIL] Tu pedido esta listo para retirar.
+[DAO] Notificacion registrada en el historial: Tu pedido esta listo para retirar.
+[WHATSAPP] Tu pedido esta listo para retirar.
+[DAO] Notificacion registrada en el historial: Tu pedido esta listo para retirar.
+[SMS] Tu pedido esta listo para retirar.
+[DAO] Notificacion registrada en el historial: Tu pedido esta listo para retirar.
+[PUSH] Tu pedido esta listo para retirar.
+[DAO] Notificacion registrada en el historial: Tu pedido esta listo para retirar.
+
+=== DESAFIO OPCIONAL: ENVIO MULTIPLE CONCURRENTE ===
+[SMS] Aviso enviado por todos los canales configurados.
+[EMAIL] Aviso enviado por todos los canales configurados.
+[WHATSAPP] Aviso enviado por todos los canales configurados.
+[PUSH] Aviso enviado por todos los canales configurados.
+[DAO] Notificacion registrada en el historial: Aviso enviado por todos los canales configurados.
+
+[DAO] Historial: 5 registro(s)
+  1. Tu pedido esta listo para retirar.
+  2. Tu pedido esta listo para retirar.
+  3. Tu pedido esta listo para retirar.
+  4. Tu pedido esta listo para retirar.
+  5. Aviso enviado por todos los canales configurados.

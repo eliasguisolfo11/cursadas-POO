@@ -1,0 +1,84 @@
+@startuml
+title Notificaciones con MVC, DAO y DIP
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "app" {
+  class Main {
+    +main(args: String[]): void
+  }
+}
+
+package "controller" {
+  class NotificacionController {
+    -servicio: NotificacionService
+    -vista: ConsolaView
+    +enviar(mensaje: String): void
+    +mostrarHistorial(): void
+  }
+}
+
+package "service" {
+  class NotificacionService {
+    -mensajeria: Mensajeria
+    -notificacionDAO: NotificacionDAO
+    +notificar(mensaje: String): Notificacion
+    +obtenerHistorial(): List<Notificacion>
+  }
+}
+
+package "view" {
+  class ConsolaView {
+    +mostrarTitulo(titulo: String): void
+    +mostrarRegistro(notificacion: Notificacion): void
+    +mostrarHistorial(historial: List<Notificacion>): void
+  }
+}
+
+package "model" {
+  interface Mensajeria {
+    +enviar(mensaje: String): void
+  }
+  class Notificacion <<record>> {
+    +mensaje: String
+    +creadaEn: Instant
+  }
+}
+
+package "dao" {
+  interface NotificacionDAO {
+    +guardar(notificacion: Notificacion): void
+    +listar(): List<Notificacion>
+  }
+  class NotificacionDAOMemoria {
+    -notificaciones: List<Notificacion>
+  }
+}
+
+package "model.canales" {
+  class Email
+  class WhatsApp
+  class SMS
+  class Push
+  class MensajeriaMultiple {
+    -canales: List<Mensajeria>
+    -executor: Executor
+  }
+}
+
+Main ..> NotificacionController : configura e inicia
+NotificacionController --> NotificacionService : delega
+NotificacionController --> ConsolaView : presenta
+NotificacionService --> Mensajeria : inyectada por constructor
+NotificacionService --> NotificacionDAO : inyectado por constructor
+NotificacionService ..> Notificacion : crea
+NotificacionDAO <|.. NotificacionDAOMemoria
+NotificacionDAOMemoria o--> "0..*" Notificacion : guarda
+Mensajeria <|.. Email
+Mensajeria <|.. WhatsApp
+Mensajeria <|.. SMS
+Mensajeria <|.. Push
+Mensajeria <|.. MensajeriaMultiple
+MensajeriaMultiple "1" o--> "1..*" Mensajeria : distribuye
+MensajeriaMultiple ..> Executor : delega tareas
+@enduml

@@ -1,0 +1,2 @@
+=== PARTE 1: IMPLEMENTACION INICIAL ===
+[EMAIL] Tu pedido esta listo para retirar.
