@@ -1,0 +1,12 @@
+{
+  "name": "uso-memoria-objetos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/app/main.js"
+  }
+}
